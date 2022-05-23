@@ -1,0 +1,118 @@
+
+1.
+create table DEPT (DEPTNO int(2),
+DNAME varchar(15),
+LOC varchar(10)
+);
+
+
+insert into DEPT values 
+( 10 , 'ACCOUNTING' , 'NEW YORK') ,
+( 20 , 'RESEARCH' ,  'DALLAS' ),
+( 30 , 'SALES' , 'CHICAGO' ),
+( 40 , 'OPERATIONS' , 'BOSTON');
+
+2.
+create table EMP  (EMPNO int(4),
+ENAME varchar(10),
+JOB varchar(9),
+HIREDATE date,
+SAL float(7,2),
+COMM float(7,2),
+DEPTNO int(2));
+
+insert into EMP values 
+(7839 , 'KING', 'MANAGER' , '1991-11-17' , 5000 , NULL , 10),
+(7698 , 'BLAKE' , 'CLERK' , '1981-05-01' , 2850 , NULL , 30),
+(7782 , 'CLARK' , 'MANAGER', '1981-06-09', 2450 ,NULL, 10),
+(7566, 'JONES', 'CLERK', '1981-04-02', 2975, NULL, 20),
+(7654 ,'MARTIN', 'SALESMAN', '1981-09-28', 1250 ,1400, 30),
+(7499, 'ALLEN' ,'SALESMAN', '1981-02-20' ,1600, 300, 30);
+
+
+3.
+select * from EMP  
+where SAL between 2500 and 5000 ;
+
+4.
+select ENAME FROM EMP 
+order by ENAME DESC ;
+
+5.
+select lower(JOB)  FROM EMP ;
+
+
+
+
+6.
+select ENAME , length(ENAME) "LENGTH" FROM EMP ;
+
+7.
+select DEPTNO , count( DEPTNO) "COUNT" FROM EMP 
+group by DEPTNO ;
+
+8.
+select DNAME , ENAME FROM EMP , DEPT
+where EMP.DEPTNO = DEPT.DEPTNO
+ORDER BY DNAME , ENAME;
+
+9.
+SELECT instr(ENAME , 'AR') "POSITION" FROM  EMP ; 
+
+10.
+SELECT * , SAL*0.20 "HRA" FROM EMP ;
+
+
+section 2
+
+
+1.
+
+create table tempp (s1 varchar(10), s2 varchar (10));
+
+delimiter //
+               
+
+create procedure PROC1 ( S1 VARCHAR (10) , S2 VARCHAR (10))
+begin 
+
+insert into tempp values (S1 , S2);
+
+end;//
+
+CALL PROC1 ('DAC','CDAC');
+
+delimiter ;
+
+
+2.
+
+delimiter //
+create function FUNC1 (a int , b int , c int ) returns boolean 
+begin 
+if not (a+b>=c	
+               and b+c >=a
+               and c+a >=b) 
+               then 
+ return true ;
+end if;
+
+
+ 
+ create procedure abc ()
+begin 
+ a number = &side1;
+ b number = &side2;
+ c number = &side3;
+ 
+ x boolean ;
+ 
+
+  x = FUNC1 (a,b,c);
+  end;//
+  
+  
+ delimiter ;
+
+
+
